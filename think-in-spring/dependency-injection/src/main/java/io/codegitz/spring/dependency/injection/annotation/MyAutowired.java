@@ -1,0 +1,22 @@
+package io.codegitz.spring.dependency.injection.annotation;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.lang.annotation.*;
+
+/**
+ * 自定义注入注解
+ * @author 张观权
+ * @date 2020/9/17 11:22
+ **/
+@Target({ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.FIELD})
+@Retention(RetentionPolicy.RUNTIME)
+@Documented
+@Autowired
+public @interface MyAutowired {
+    /**
+     * Declares whether the annotated dependency is required.
+     * <p>Defaults to {@code true}.
+     */
+    boolean required() default true;
+}

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--    普通BeanDefinition  GenericBeanDefinition-->
+    <!--    合并后GenericBeanDefinition 变成RootBeanDefinition-->
+    <bean id="user" class="io.codegitz.spring.ioc.overview.domain.User">
+        <property name="id" value="1"/>
+        <property name="name" value="codegitz"/>
+    </bean>
+
+<!--    普通BeanDefinition  GenericBeanDefinition-->
+<!--    合并后GenericBeanDefinition 变成RootBeanDefinition，并且覆盖相关parent属性-->
+<!--    primary = true，增加一个address属性-->
+    <bean id="superUser" class="io.codegitz.spring.ioc.overview.domain.SuperUser" parent="user"
+    primary="true">
+        <property name="address" value="广州"/>
+    </bean>
+
+    <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
+        <property name="targetBeanName" value="user"/>
+    </bean>
+</beans>

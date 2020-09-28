@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:users="http://www.codegitz.io/schema/users"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.codegitz.io/schema/users
+       http://www.codegitz.io/schema/users.xsd
+        ">
+<!--
+    <bean id="user" class="io.codegitz.spring.ioc.overview.domain.User">
+        <property name="id" value="1"/>
+        <property name="name" value="codegitz"/>
+    </bean>
+-->
+    <users:user id="1" name="codegitzCustomized"/>
+</beans>
