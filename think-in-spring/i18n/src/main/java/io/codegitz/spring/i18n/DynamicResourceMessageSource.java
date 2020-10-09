@@ -26,6 +26,7 @@ import static java.nio.file.StandardWatchEventKinds.ENTRY_MODIFY;
  * 动态 （更新） 资源 {@link org.springframework.context.MessageSource}
  * <p>
  * 实现步骤：
+ * <p>
  * 1.定位资源位置 （Properties 文件）
  * 2.初始化Properties对象
  * 3.实现AbstractMessageSource#resolveCode方法
