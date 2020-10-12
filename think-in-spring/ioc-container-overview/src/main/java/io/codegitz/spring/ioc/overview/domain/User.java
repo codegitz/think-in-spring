@@ -17,6 +17,16 @@ public class User implements BeanNameAware {
 
     private String beanName;
 
+    private Company company;
+
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     public static User createUser() {
         return new User();
     }
@@ -42,6 +52,8 @@ public class User implements BeanNameAware {
         return "User{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", beanName='" + beanName + '\'' +
+                ", company=" + company +
                 '}';
     }
 
