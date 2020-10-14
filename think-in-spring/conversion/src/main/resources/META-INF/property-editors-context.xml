@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--// 3.注册为 bean-->
+    <bean class="io.codegitz.spring.conversion.CustomizedPropertyEditorRegistrar"/>
+
+    <bean id="user" class="io.codegitz.spring.ioc.overview.domain.User">
+        <property name="id" value="1"/>
+        <property name="name" value="Codegitz"/>
+        <property name="context">
+            <value>
+                id = 1
+                name = Codegitz
+            </value>
+        </property>
+    </bean>
+
+
+</beans>

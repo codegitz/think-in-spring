@@ -4,6 +4,7 @@ import org.springframework.beans.factory.BeanNameAware;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.util.Properties;
 
 /**
  * @author 张观权
@@ -18,6 +19,16 @@ public class User implements BeanNameAware {
     private String beanName;
 
     private Company company;
+
+    private Properties context;
+
+    public Properties getContext() {
+        return context;
+    }
+
+    public void setContext(Properties context) {
+        this.context = context;
+    }
 
     public Company getCompany() {
         return company;
@@ -54,6 +65,7 @@ public class User implements BeanNameAware {
                 ", name='" + name + '\'' +
                 ", beanName='" + beanName + '\'' +
                 ", company=" + company +
+                ", context=" + context +
                 '}';
     }
 
