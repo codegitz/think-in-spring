@@ -1,10 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/util
+        http://www.springframework.org/schema/util/spring-util.xsd">
 
     <!--// 3.注册为 bean-->
     <bean class="io.codegitz.spring.conversion.CustomizedPropertyEditorRegistrar"/>
+<!-- 声明 ConversionServiceFactoryBean 注册时 id 必须为 conversionService-->
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters" >
+            <bean class="io.codegitz.spring.conversion.PropertiesToStringConverter"/>
+        </property>
+    </bean>
+
+    <util:properties id="context">
+        <prop key="id">1</prop>
+        <prop key="name">Codegitz</prop>
+    </util:properties>
 
     <bean id="user" class="io.codegitz.spring.ioc.overview.domain.User">
         <property name="id" value="1"/>
@@ -15,6 +30,7 @@
                 name = Codegitz
             </value>
         </property>
+        <property name="contextAsText" ref="context"/>
     </bean>
 
 

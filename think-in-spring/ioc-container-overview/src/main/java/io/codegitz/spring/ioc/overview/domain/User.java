@@ -22,6 +22,28 @@ public class User implements BeanNameAware {
 
     private Properties context;
 
+    private String contextAsText;
+
+    public String getContextAsText() {
+        return contextAsText;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", beanName='" + beanName + '\'' +
+                ", company=" + company +
+                ", context=" + context +
+                ", contextAsText='" + contextAsText + '\'' +
+                '}';
+    }
+
+    public void setContextAsText(String contextAsText) {
+        this.contextAsText = contextAsText;
+    }
+
     public Properties getContext() {
         return context;
     }
@@ -56,17 +78,6 @@ public class User implements BeanNameAware {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", beanName='" + beanName + '\'' +
-                ", company=" + company +
-                ", context=" + context +
-                '}';
     }
 
     @PostConstruct
