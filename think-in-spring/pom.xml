@@ -20,6 +20,7 @@
         <module>rmi</module>
         <module>conversion</module>
         <module>generic</module>
+        <module>mockito</module>
     </modules>
     <groupId>io.codegitz</groupId>
     <version>1.0-SNAPSHOT</version>

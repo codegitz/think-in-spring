@@ -12,7 +12,7 @@ import java.util.stream.Stream;
  * @date 2020/10/18 23:25
  **/
 public class GenericApiDemo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         // 原生类型 primitive types : int float double
         Class intClass = int.class;
@@ -34,5 +34,10 @@ public class GenericApiDemo {
         Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
 
         Stream.of(actualTypeArguments).map(TypeVariable.class::cast).forEach(System.out::println);
+
+        while (true){
+            Thread.sleep(1000L);
+            System.out.println("Thread.sleep(1000L);");
+        }
     }
 }
