@@ -45,9 +45,13 @@ public class ApplicationListenerDemo implements ApplicationEventPublisherAware {
         applicationContext.register(MyApplicationListener.class);
 
         // 方法二：使用注解 @org.springframework.context.event.EventListener
-        applicationContext.refresh();
+        applicationContext.refresh(); //触发ContextRefreshedEvent
 
-        applicationContext.close();
+        applicationContext.start(); //触发ContextStartedEvent
+
+        applicationContext.close(); //触发ContextStoppedEvent
+
+        applicationContext.close(); //触发ContextClosedEvent
     }
 
     /**
