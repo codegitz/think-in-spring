@@ -1,0 +1,18 @@
+package io.codegitz.spring.event;
+
+import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationListener;
+
+/**
+ * 自定义 Spring 事件监听器
+ * @author 张观权
+ * @date 2020/10/22 20:11
+ **/
+public class MySpringEventListener implements ApplicationListener<MySpringEvent> {
+
+    @Override
+    public void onApplicationEvent(MySpringEvent event) {
+        System.out.printf("[线程 ：%s 监听到事件 : %s ]",Thread.currentThread().getName(),event);
+    }
+}
