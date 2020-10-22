@@ -1,6 +1,8 @@
 package io.codegitz.spring.event;
 
 import org.springframework.context.ApplicationEvent;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.context.ApplicationEventPublisherAware;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.ContextClosedEvent;
@@ -21,7 +23,7 @@ import org.springframework.scheduling.annotation.EnableAsync;
  * @see org.springframework.context.event.EventListener
  **/
 @EnableAsync
-public class ApplicationListenerDemo {
+public class ApplicationListenerDemo implements ApplicationEventPublisherAware {
     public static void main(String[] args) {
 //        GenericApplicationContext applicationContext = new GenericApplicationContext();
 
@@ -46,6 +48,17 @@ public class ApplicationListenerDemo {
         applicationContext.refresh();
 
         applicationContext.close();
+    }
+
+    /**
+     * 事件发布器 ApplicationEventPublisher 和 ApplicationEventMulticaster
+     * @param applicationEventPublisher
+     */
+    @Override
+    public void setApplicationEventPublisher(ApplicationEventPublisher applicationEventPublisher) {
+        applicationEventPublisher.publishEvent(new ApplicationEvent("Hello,world") {
+        });
+        applicationEventPublisher.publishEvent("Hello,world");
     }
 
     static class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent>{
