@@ -1,9 +1,6 @@
 package io.codegitz.spring.event;
 
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.ApplicationEventPublisherAware;
-import org.springframework.context.ApplicationListener;
+import org.springframework.context.*;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -56,6 +53,7 @@ public class ApplicationListenerDemo implements ApplicationEventPublisherAware {
 
     /**
      * 事件发布器 ApplicationEventPublisher 和 ApplicationEventMulticaster
+     *
      * @param applicationEventPublisher
      */
     @Override
@@ -63,42 +61,67 @@ public class ApplicationListenerDemo implements ApplicationEventPublisherAware {
         applicationEventPublisher.publishEvent(new ApplicationEvent("Hello,world") {
         });
         applicationEventPublisher.publishEvent("Hello,world");
+        applicationEventPublisher.publishEvent(new MyPayloadApplicationEvent(this, "Hello,world"));
     }
 
-    static class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent>{
+    /**
+     * MyPayloadApplicationEvent<String>必须指定，不然报错如下
+     * 警告: Exception encountered during context initialization - cancelling refresh attempt:
+     * org.springframework.beans.factory.BeanCreationException:
+     * Error creating bean with name 'applicationListenerDemo':
+     * Initialization of bean failed; nested exception is java.lang.IllegalArgumentException:
+     * Mismatched number of generics specified
+     */
+    static class MyPayloadApplicationEvent<String> extends PayloadApplicationEvent<String> {
+
+        /**
+         * Create a new PayloadApplicationEvent.
+         *
+         * @param source  the object on which the event initially occurred (never {@code null})
+         * @param payload the payload object (never {@code null})
+         */
+        public MyPayloadApplicationEvent(Object source, String payload) {
+            super(source, payload);
+        }
+    }
+
+
+    static class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent> {
         @Override
         public void onApplicationEvent(ContextRefreshedEvent event) {
             println("MyApplicationListener 接收到事件： " + event);
         }
     }
+
     @EventListener
     @Order(1)
-    public void onApplicationEvent(ContextRefreshedEvent event){
+    public void onApplicationEvent(ContextRefreshedEvent event) {
         println("@EventListener 接收到事件 ContextRefreshedEvent");
     }
 
     @EventListener
     @Order(2)
-    public void onApplicationEvent1(ContextRefreshedEvent event){
+    public void onApplicationEvent1(ContextRefreshedEvent event) {
         println("@EventListener1 接收到事件 ContextRefreshedEvent");
     }
+
     @EventListener
     @Async
-    public void onApplicationEventAsync(ContextRefreshedEvent event){
+    public void onApplicationEventAsync(ContextRefreshedEvent event) {
         println("@EventListener (异步)接收到事件 ContextRefreshedEvent");
     }
 
     @EventListener
-    public void onApplicationEvent(ContextStartedEvent event){
+    public void onApplicationEvent(ContextStartedEvent event) {
         println("@EventListener 接收到事件 ContextStartedEvent");
     }
 
     @EventListener
-    public void onApplicationEvent(ContextClosedEvent event){
+    public void onApplicationEvent(ContextClosedEvent event) {
         println("@EventListener 接收到事件 ContextClosedEvent");
     }
 
-    public static void println(Object printable){
-        System.out.printf("线程名称: [%s]，事件内容%s : \n",Thread.currentThread().getName(),printable);
+    public static void println(Object printable) {
+        System.out.printf("线程名称: [%s]，事件内容%s : \n", Thread.currentThread().getName(), printable);
     }
 }
