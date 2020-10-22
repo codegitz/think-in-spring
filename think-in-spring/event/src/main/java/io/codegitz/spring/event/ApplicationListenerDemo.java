@@ -28,7 +28,9 @@ public class ApplicationListenerDemo {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
         applicationContext.register(ApplicationListenerDemo.class);
+
         // 方法一：面向 Spring 接口
+        // a.基于 ConfigurableApplicationContext API 实现
         applicationContext.addApplicationListener(new ApplicationListener<ApplicationEvent>() {
             @Override
             public void onApplicationEvent(ApplicationEvent event) {
@@ -36,12 +38,22 @@ public class ApplicationListenerDemo {
             }
         });
 
+        // b.将 ApplicationListener 注册为 Spring bean
+        // 将 MyapplicationListener 作为 Configuration class 注册
+        applicationContext.register(MyApplicationListener.class);
+
         // 方法二：使用注解 @org.springframework.context.event.EventListener
         applicationContext.refresh();
 
         applicationContext.close();
     }
 
+    static class MyApplicationListener implements ApplicationListener<ContextRefreshedEvent>{
+        @Override
+        public void onApplicationEvent(ContextRefreshedEvent event) {
+            println("MyApplicationListener 接收到事件： " + event);
+        }
+    }
     @EventListener
     @Order(1)
     public void onApplicationEvent(ContextRefreshedEvent event){
