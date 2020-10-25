@@ -1,7 +1,5 @@
 package io.codegitz.spring.event;
 
-import org.springframework.context.ApplicationEvent;
-import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.ApplicationListener;
 
 /**
