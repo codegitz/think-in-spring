@@ -14,7 +14,7 @@ import java.lang.annotation.*;
 @Documented
 @ComponentScan
 public @interface MyComponentScan2 {
-    @AliasFor(annotation = ComponentScan.class,value = "basePackages")
+    @AliasFor(annotation = MyComponentScan.class,attribute = "scanBasePackages")
     String[] scanBasePackages() default {};
 
 }
