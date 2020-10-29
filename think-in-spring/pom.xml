@@ -23,6 +23,7 @@
         <module>mockito</module>
         <module>event</module>
         <module>annotation</module>
+        <module>argument</module>
     </modules>
     <groupId>io.codegitz</groupId>
     <version>1.0-SNAPSHOT</version>
