@@ -11,6 +11,6 @@ import org.springframework.core.type.AnnotatedTypeMetadata;
 public class EvenConditional implements Condition {
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-        return context.getEnvironment().acceptsProfiles("odd");
+        return context.getEnvironment().acceptsProfiles("even");
     }
 }
