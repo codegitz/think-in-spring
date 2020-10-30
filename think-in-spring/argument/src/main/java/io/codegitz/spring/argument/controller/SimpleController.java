@@ -2,14 +2,19 @@ package io.codegitz.spring.argument.controller;
 
 import io.codegitz.spring.argument.entity.User;
 import io.codegitz.spring.argument.vo.UserVo;
+import org.springframework.http.converter.json.GsonBuilderUtils;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
 import java.nio.file.Files;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 /**
  * GET方法请求参数处理
@@ -95,5 +100,43 @@ public class SimpleController {
         response.setContentType("application/octet-stream");
         return "success";
     }
+
+    /**
+     * map 参数接收
+     * @param param
+     * @return
+     */
+    @PostMapping("/map")
+    public String map(Map<String,Object> param){
+        System.out.println(param.get("name"));
+        System.out.println(param.get("age"));
+        return "success";
+    }
+
+    @PostMapping("/map2")
+    public String map2(@RequestParam Map<String,Object> param){
+        System.out.println(param.get("name"));
+        System.out.println(param.get("age"));
+        return "success";
+    }
+
+    /**
+     * MultipartFile集合-批量文件上传
+     */
+    @PostMapping("/batch")
+    public void batch(MultipartHttpServletRequest request){
+        List<MultipartFile> files = request.getFiles("file");
+        files.forEach(f ->{
+            System.out.println(f.getOriginalFilename());
+        });
+    }
+
+    @PostMapping("/batch2")
+    public void batch2(@RequestParam(name = "file") List<MultipartFile> files){
+        files.forEach(f ->{
+            System.out.println(f.getOriginalFilename());
+        });
+    }
+
 
 }
