@@ -28,6 +28,14 @@ public class User implements BeanNameAware {
         return contextAsText;
     }
 
+    public User(Long id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public User() {
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -90,6 +98,7 @@ public class User implements BeanNameAware {
     }
 
 
+    @Override
     public void setBeanName(String name) {
         this.beanName = name;
     }

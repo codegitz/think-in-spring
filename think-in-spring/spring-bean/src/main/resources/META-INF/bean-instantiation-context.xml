@@ -7,6 +7,12 @@
     <bean id="user-by-static-method" class="io.codegitz.spring.ioc.overview.domain.User"
           factory-method="createUser"/>
 
+    <!--    构造方法  -->
+    <bean id="user-by-constructor" class="io.codegitz.spring.ioc.overview.domain.User">
+        <constructor-arg value="111"></constructor-arg>
+        <constructor-arg value="constructor"></constructor-arg>
+    </bean>
+
 <!--    实例化方法  -->
     <bean id="user-by-instance-method" factory-bean="userFactory" factory-method="createUser"/>
     <bean id="userFactory" class="io.codegitz.spring.bean.factory.DefaultUserFactory"/>

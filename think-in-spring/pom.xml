@@ -26,6 +26,7 @@
         <module>argument</module>
         <module>environment</module>
         <module>application-context-lifecycle</module>
+        <module>questions</module>
     </modules>
     <groupId>io.codegitz</groupId>
     <version>1.0-SNAPSHOT</version>
