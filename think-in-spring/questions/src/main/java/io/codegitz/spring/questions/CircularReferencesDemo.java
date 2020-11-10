@@ -8,8 +8,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.annotation.Bean;
 
 /**
- * {@link ObjectProvider} 示例
- * {@link ObjectFactory}
+ * 循环引用示例
  * @author 张观权
  * @date 2020/11/6 15:11
  **/
@@ -20,10 +19,10 @@ public class CircularReferencesDemo {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
         applicationContext.register(CircularReferencesDemo.class);
+//        applicationContext.setAllowCircularReferences(false);
 
         applicationContext.refresh();
 
-        applicationContext.setAllowCircularReferences(false);
 
         System.out.println("student: "+ applicationContext.getBean(Student.class));
         System.out.println("Classroom: "+ applicationContext.getBean(Classroom.class));

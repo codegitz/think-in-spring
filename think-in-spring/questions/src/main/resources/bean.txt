@@ -1,0 +1,23 @@
+
+// 执行实现了BeanDefinitionRegistryPostProcessor接口的后置处理器的
+postProcessBeanDefinitionRegistry方法，注意这里执行的不是postProcessBeanFactory方法，
+我们上面已经讲过了，实现了BeanDefinitionRegistryPostProcessor接口的后置处理器有两个方法，
+一个是从父接口中继承而来的postProcessBeanFactory方法，
+另一个是这个接口特有的postProcessBeanDefinitionRegistry方法
+
+// 保存执行过了的BeanDefinitionRegistryPostProcessor，
+这里执行过的BeanDefinitionRegistryPostProcessor只是代表它的特有方法：
+postProcessBeanDefinitionRegistry方法执行过了，但是千万记得，
+它还有一个标准的postProcessBeanFactory，也就是从父接口中继承的方法还未执行
+
+// 执行后置处理器的逻辑，这里只会执行
+BeanDefinitionRegistryPostProcessor接口的postProcessBeanDefinitionRegistry方法
+
+// 接下来这段代码是为了确认所有实现了
+BeanDefinitionRegistryPostProcessor的后置处理器能够执行完，
+之所有要一个循环中执行，也是为了防止在执行过程中注册了新的BeanDefinitionRegistryPostProcessor
+
+// 获取普通的BeanDefinitionRegistryPostProcessor，不需要实现PriorityOrdered或者Ordered接口
+
+// 只要发现有一个需要执行了的后置处理器，就需要再次循环，
+因为执行了这个后置处理可能会注册新的BeanDefinitionRegistryPostProcessor
