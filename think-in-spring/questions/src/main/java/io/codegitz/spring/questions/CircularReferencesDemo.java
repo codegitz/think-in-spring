@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * 循环引用示例
  * @author 张观权
@@ -15,11 +17,14 @@ import org.springframework.context.annotation.Bean;
 public class CircularReferencesDemo {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnsupportedEncodingException {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
 
         applicationContext.register(CircularReferencesDemo.class);
 //        applicationContext.setAllowCircularReferences(false);
+
+        String name = String.format("kp-%s-%s-%s.zip","1111","很好很好","10");
+        System.out.println(new String(name.getBytes()));
 
         applicationContext.refresh();
 

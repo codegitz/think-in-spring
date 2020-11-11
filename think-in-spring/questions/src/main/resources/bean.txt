@@ -21,3 +21,7 @@ BeanDefinitionRegistryPostProcessor的后置处理器能够执行完，
 
 // 只要发现有一个需要执行了的后置处理器，就需要再次循环，
 因为执行了这个后置处理可能会注册新的BeanDefinitionRegistryPostProcessor
+
+
+headers.add("Content-Disposition","attachment;filename*=UTF-8''"+URLEncoder.encode("中国","UTF-8")+".txt");
+
