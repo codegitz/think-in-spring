@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.nio.file.Files;
 import java.util.List;
 import java.util.Map;
@@ -136,6 +138,14 @@ public class SimpleController {
         files.forEach(f ->{
             System.out.println(f.getOriginalFilename());
         });
+    }
+
+    public static void main(String[] args) throws UnsupportedEncodingException {
+        String encode = URLEncoder.encode("接驳点导入模板.xlsx", "UTF-8");
+        //%E6%8E%A5%E9%A9%B3%E7%82%B9%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx
+        System.out.println(encode);
+        String decode = URLDecoder.decode("%E6%8E%A5%E9%A9%B3%E7%82%B9%E5%AF%BC%E5%85%A5%E6%A8%A1%E6%9D%BF.xlsx", "UTF-8");
+        System.out.println(decode);
     }
 
 
