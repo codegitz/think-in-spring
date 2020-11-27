@@ -1,5 +1,6 @@
 package io.codegitz.spring.decode;
 
+import io.codegitz.spring.decode.dto.InfoDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -7,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
+import javax.sound.sampled.Line;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -29,5 +31,13 @@ public class DownloadController {
     @GetMapping("/index")
     public String index()  {
         return "download";
+    }
+
+    @GetMapping("/info")
+    @ResponseBody
+    public InfoDTO infoDTO(){
+        InfoDTO infoDTO = new InfoDTO();
+        infoDTO.setInfo("info");
+        return infoDTO;
     }
 }
