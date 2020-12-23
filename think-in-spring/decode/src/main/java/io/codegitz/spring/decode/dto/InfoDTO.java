@@ -15,6 +15,13 @@ public class InfoDTO {
 
     private String info;
 
+    public InfoDTO() {
+    }
+
+    public InfoDTO(String name) {
+        this.name = name;
+    }
+
     private List<InfoDTO> list;
 
     public List<InfoDTO> getList() {
