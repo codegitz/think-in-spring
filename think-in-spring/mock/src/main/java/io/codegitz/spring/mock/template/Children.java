@@ -32,4 +32,8 @@ public class Children extends SuperClass  {
     public String childrenMethodInvokeSuper(){
         return super.sayHello() + userService.getName();
     }
+
+    public String getLianLuSmsConfigDTO(){
+        return this.getMsgPushConfig();
+    }
 }

@@ -1,11 +1,14 @@
 package io.codegitz.spring.mock.template;
 
 import io.codegitz.spring.mock.UserService;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.reflect.Whitebox;
 
 /**
  * @author 张观权
@@ -16,13 +19,22 @@ public class ChildrenTest {
     @Mock
     private UserService userService;
 
-    @Mock
+    @InjectMocks
     private Children children;
 
     @Test
     public void test(){
+        Whitebox.setInternalState(children,"userService",userService);
+        Mockito.when(userService.getName()).thenReturn(" codegitz!");
         String methodInvokeSuper = children.childrenMethodInvokeSuper();
+        Assert.assertEquals("hello,super codegitz!",methodInvokeSuper);
         System.out.println(methodInvokeSuper);
+    }
+
+    @Test
+    public void getLianLuSmsConfigDTO(){
+        String lianLuSmsConfigDTO = children.getLianLuSmsConfigDTO();
+        System.out.println(lianLuSmsConfigDTO);
     }
 
 }
