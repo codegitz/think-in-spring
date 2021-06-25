@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+       default-autowire="constructor"><!--这里开启自动注入，并且是通过构造函数进行自动注入-->
+
+    <!--factoryObject 提供了创建对象的方法-->
+    <bean id="factoryObject" class="io.codegitz.spring.dmz.factory.FactoryObject"/>
+
+    <!--提供一个用于测试自动注入的对象-->
+    <bean class="io.codegitz.spring.dmz.service.OrderService" id="orderService"/>
+
+    <!--主要测试这个对象的实例化过程-->
+    <bean id="dmzService" factory-bean="factoryObject" factory-method="getDmz" scope="prototype">
+        <constructor-arg name="name" value="dmz"/>
+        <constructor-arg name="age" value="18"/>
+        <constructor-arg name="birthDay" value="2020-05-23"/>
+    </bean>
+
+    <!--测试静态方法实例化对象的过程-->
+    <bean id="indexService" class="io.codegitz.spring.dmz.factory.FactoryObject"
+          factory-method="staticGetIndex"/>
+
+    <!--提供这个转换器,用于转换dmzService中的birthDay属性,从字符串转换成日期对象-->
+    <bean class="org.springframework.context.support.ConversionServiceFactoryBean" id="conversionService">
+        <property name="converters">
+            <set>
+                <bean class="io.codegitz.spring.dmz.service.ConverterStr2Date"/>
+            </set>
+        </property>
+    </bean>
+</beans>

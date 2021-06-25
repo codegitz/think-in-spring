@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean class="io.codegitz.spring.dependency.circular.Entity.BeanA" name="beanA">
+        <property name="b" ref="beanB"/>
+    </bean>
+    <bean class="io.codegitz.spring.dependency.circular.Entity.BeanB" name="beanB">
+        <property name="c" ref="beanC"/>
+    </bean>
+    <bean class="io.codegitz.spring.dependency.circular.Entity.BeanC" name="beanC">
+        <property name="a" ref="beanA"/>
+    </bean>
+
+</beans>

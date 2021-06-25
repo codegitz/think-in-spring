@@ -33,6 +33,8 @@ public class ChildrenTest {
 
     @Test
     public void getLianLuSmsConfigDTO(){
+        Whitebox.setInternalState(children,"userService",userService);
+        Mockito.when(userService.getName()).thenReturn(" codegitz!");
         String lianLuSmsConfigDTO = children.getLianLuSmsConfigDTO();
         System.out.println(lianLuSmsConfigDTO);
     }
