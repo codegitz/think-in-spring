@@ -32,8 +32,8 @@ import java.util.List;
  **/
 public class ThreeSumClosest {
 	public static void main(String[] args) {
-		int[] nums = new int[]{-1,2,1,-4};
-		int i = threeSumClosest(nums, 1);
+		int[] nums = new int[]{1,1,1,0};
+		int i = threeSumClosest(nums, -100);
 		System.out.println(i);
 	}
 
@@ -64,7 +64,7 @@ public class ThreeSumClosest {
 		return close;
 	}
 
-	public static int threeSumClosest(int[] nums, int target) {
+	public static int threeSumClosest2(int[] nums, int target) {
 		Arrays.sort(nums);
 		int n = nums.length;
 		int ans = Integer.MAX_VALUE;
@@ -101,4 +101,66 @@ public class ThreeSumClosest {
 		}
 		return ans ;
 	}
+
+	public static int threeSumClosest3(int[] nums, int target) {
+		int length = nums.length;
+		int sum = 0;
+		Arrays.sort(nums);
+		int diff = Integer.MAX_VALUE;
+		int result = nums[0] + nums[1] + nums[length - 1];
+		for (int i = 0 ; i < length - 2 ; i++){
+			int left = i + 1;
+			int right = length - 1;
+			while (left < right){
+				sum = nums[i] + nums[left] + nums[right];
+				if(Math.abs(sum-target) < diff){
+
+					result = sum;
+					diff = Math.abs(sum - target);
+				}
+				if (sum == target){
+					return sum;
+				}else if (sum < target){
+					left++;
+				}else if (sum > target){
+					right--;
+				}
+				while (left < right && nums[left -1] == nums[left]){
+					left++;
+				}
+				while (left < right && right + 1 < length && nums[right + 1] == nums[right]){
+					right--;
+				}
+			}
+		}
+		return result;
+	}
+	public static int threeSumClosest(int[] nums, int target) {
+		int n = nums.length;
+		Arrays.sort(nums);
+		int ans = 0;
+		int diff = Integer.MAX_VALUE;
+		for(int i=0;i<n-2;i++){
+			int l = i+1;
+			int r = n-1;
+			while(l<r){
+				int sum = nums[i] + nums[l] + nums[r];
+				if(Math.abs(sum-target)<diff){
+					ans = sum;
+					diff = Math.abs(sum - target);
+				}
+				if(sum==target){
+					return sum;
+				}
+				else if(sum > target){
+					r--;
+				}
+				else {
+					l++;
+				}
+			}
+		}
+		return ans;
+	}
+
 }
