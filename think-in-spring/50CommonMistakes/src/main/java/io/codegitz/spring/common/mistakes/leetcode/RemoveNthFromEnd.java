@@ -28,22 +28,65 @@ package io.codegitz.spring.common.mistakes.leetcode;
  **/
 public class RemoveNthFromEnd {
 
+    public static void main(String[] args) {
+        ListNode node1  = new ListNode();
+        node1.val = 1;
+        ListNode node2  = new ListNode();
+        node1.next = node2;
+        node2.val = 2;
+        ListNode node3  = new ListNode();
+        node2.next = null;
+        node3.val = 3;
+        ListNode node4  = new ListNode();
+        node3.next = null;
+        node4.val = 4;
+        ListNode node5  = new ListNode();
+        node4.next = node5;
+        node5.val = 5;
+        ListNode listNode = removeNthFromEnd(node1, 2);
+        System.out.println(listNode);
 
-    public ListNode removeNthFromEnd(ListNode head, int n) {
+
+    }
+
+
+    public static ListNode removeNthFromEnd(ListNode head, int n) {
         ListNode first = head;
         ListNode second = head;
+        if (n == 1){
+            first = first.next;
+            if (first == null){
+                return first;
+            }
+            while (first.next != null){
+                first = first.next;
+                second = second.next;
+            }
+            second.next = null;
+            return head;
+        }
+
         int i = 0;
+        boolean flag = false;
         while (first.next != null){
-            if (i <= n){
+            if (i < n){
                 first = first.next;
                 i++;
+                continue;
             }
+            flag = true;
             first = first.next;
             second = second.next;
         }
-
-
-        return null;
+        if (flag){
+            second.next = second.next.next;
+            return head;
+        }else if (i == n){
+            second.next = first;
+            return head;
+        }else {
+            return head.next;
+        }
     }
 
     static class ListNode {
@@ -53,6 +96,34 @@ public class RemoveNthFromEnd {
         ListNode(int val) { this.val = val; }
         ListNode(int val, ListNode next) {
             this.val = val; this.next = next; }
+    }
+
+    /**
+     * Excellent solution
+     * @param head
+     * @param n
+     * @return
+     */
+    public ListNode removeNthFromEnd2(ListNode head, int n) {
+        ListNode dummy=new ListNode();
+        dummy.next=head;
+
+        ListNode f=dummy;
+        ListNode s=dummy;
+
+        for(int i=0;i<n;i++){
+            f=f.next;
+        }
+
+        while(f!=null && f.next!=null){
+            f=f.next;
+            s=s.next;
+        }
+
+        s.next=s.next.next;
+        return dummy.next;
+
+
     }
 }
 
