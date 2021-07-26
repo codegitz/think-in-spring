@@ -1,5 +1,7 @@
 package io.codegitz.spring.common.mistakes.leetcode;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,7 +51,14 @@ public class MergeTwoLists {
         ListNode node6  = new ListNode();
         node5.next = node6;
         node6.val = 4;
-        ListNode listNode = mergeTwoLists(node1, node4);
+//        ListNode listNode = mergeTwoLists3(node1, node4);
+//        System.out.println(listNode);
+        ListNode[] listNodes = new ListNode[4];
+        listNodes[0] = null;
+        listNodes[1] = node1;
+        listNodes[2] = null;
+        listNodes[3] = node4;
+        ListNode listNode = mergeKLists(listNodes);
         System.out.println(listNode);
     }
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
@@ -157,6 +166,59 @@ public class MergeTwoLists {
         }
         return ret;
     }
+
+    public static ListNode mergeTwoLists3(ListNode l1, ListNode l2) {
+        ListNode result = new ListNode();
+        ListNode head = result;
+        while (l1 != null && l2 != null){
+            if (l1.val <= l2.val){
+                result.next = l1;
+                l1 = l1.next;
+                result = result.next;
+            }else {
+                result.next = l2;
+                l2 = l2.next;
+                result = result.next;
+            }
+        }
+        if (l1 != null){
+            result.next = l1;
+        }
+        if (l2 != null){
+            result.next = l2;
+        }
+        return head.next;
+
+    }
+
+    public static ListNode mergeKLists(ListNode[] lists) {
+        List<ListNode> filter = new ArrayList<>();
+        for (ListNode list : lists) {
+            if (list != null){
+                filter.add(list);
+            }
+        }
+        if (filter.size() == 0){
+            return null;
+        }
+        ListNode[] listNodes = new ListNode[filter.size()];
+        for (int i = 0 ; i < filter.size();i++){
+            listNodes[i] = filter.get(i);
+        }
+        return mergeKSortedLists(listNodes,0,listNodes.length - 1);
+    }
+
+    private static ListNode mergeKSortedLists(ListNode[] lists, int left, int right) {
+        if (left == right){
+            return lists[left];
+        }
+        if (right - left == 1){
+            return mergeTwoLists3(lists[left],lists[right]);
+        }else {
+            return mergeTwoLists3(mergeKSortedLists(lists,left,(left + right) / 2),mergeKSortedLists(lists,(left + right) / 2 + 1 ,right));
+        }
+    }
+
 
     static class ListNode {
       int val;
