@@ -27,26 +27,31 @@ import java.util.List;
  *
  **/
 public class GenerateParenthesis {
-    public List<String> generateParenthesis(int n) {
-        List<String> left = new ArrayList<>();
-        List<String> right = new ArrayList<>();
-        for (int i = 0 ; i < n ; i++){
-            left.add("(");
-            right.add(")");
+    public static void main(String[] args) {
+        List<String> list = generateParenthesis(3);
+        System.out.println(list);
+    }
+    public static List<String> solve(int open , int close ,String str, List<String> ans) {
+
+        if(open == 0 && close == 0){
+            ans.add(str);
         }
-        List<String> result = new ArrayList<>();
-        for (int i = 1 ; i <= n ; i++){
-            int tmp = i;
-            while (tmp > 0){
-                getParenthesis(left,right,tmp,tmp - 1);
-                tmp -= 1;
-            }
+
+        if(open != 0){
+            String s = str+"(";
+            solve(open-1, close ,s , ans);
         }
-        return result;
+
+        if(close > open){
+            String s = str+")";
+            solve(open,close-1,s,ans);
+        }
+        return ans;
     }
 
-    private String getParenthesis(List<String> left, List<String> right, int leftNums, int rightNums) {
 
-        return null;
+    public static List<String> generateParenthesis(int n) {
+        List<String> ans = new ArrayList<>();
+        return solve(n,n,"",ans);
     }
 }
