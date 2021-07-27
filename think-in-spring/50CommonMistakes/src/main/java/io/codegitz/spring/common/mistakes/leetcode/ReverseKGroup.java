@@ -52,48 +52,50 @@ public class ReverseKGroup {
         node3.val = 3;
 
         ListNode node4  = new ListNode();
-        node3.next = null;
+        node3.next = node4;
         node4.val = 4;
         ListNode node5  = new ListNode();
-        node4.next = null;
-        node5.val = 3;
+        node4.next = node5;
+        node5.val = 5;
         ListNode node6  = new ListNode();
         node5.next = node6;
-        node6.val = 4;
+        node6.val = 6;
         ListNode[] listNodes = new ListNode[4];
         listNodes[0] = null;
         listNodes[1] = node1;
         listNodes[2] = null;
         listNodes[3] = node4;
-        ListNode listNode = reverseKGroup(node1, 2);
+        ListNode listNode = reverseKGroup(node1, 4);
         System.out.println(listNode);
     }
 
     public static ListNode reverseKGroup(ListNode head, int k) {
-        ListNode result = new ListNode();
-        result.next = head;
-        ListNode kthNode = getKthNode(head,k);
-        if (kthNode == null){
-            return  result.next;
+        ListNode dummy = new ListNode();
+        dummy.next = head;
+        ListNode groupPrev = dummy;
+        while (true){
+            ListNode kthNode = getKthNode(groupPrev, k);
+            if (kthNode == null){
+                break;
+            }
+            ListNode groupNext = kthNode.next;
+            ListNode pre = kthNode.next;
+            ListNode curr = groupPrev.next;
+            while (curr != groupNext){
+                ListNode tmp = curr.next;
+                curr.next = pre;
+                pre = curr;
+                curr = tmp;
+            }
+            ListNode tmp = groupPrev.next;
+            groupPrev.next = kthNode;
+            groupPrev = tmp;
         }
-        ListNode current = result.next;
-        ListNode groupNext = kthNode.next;
-        result.next = kthNode;
-        ListNode pre = current.next;
-        current.next = groupNext;
-        current = pre;
-        while (current != kthNode){
-
-
-        }
-
-
-
-        return null;
+        return dummy.next;
     }
 
-    private static ListNode getKthNode(ListNode head, int k) {
-        while (head != null && k > 1){
+        private static ListNode getKthNode(ListNode head, int k) {
+        while (head != null && k > 0){
             head = head.next;
             k--;
         }
