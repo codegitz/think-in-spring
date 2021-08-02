@@ -44,6 +44,16 @@ public class SimpleController {
         System.out.println("name: " + name + ",age: " + age);
     }
 
+    @GetMapping("/get4")
+    public void get4(@RequestParam("name") String name) {
+        System.out.println("name: " + name );
+    }
+
+    @GetMapping("/get5/{name}")
+    public void get5(@PathVariable("name") String name) {
+        System.out.println("name: " + name );
+    }
+
     @PostMapping("/post")
     public void post(@RequestParam("name") String name, @RequestParam("age") String age) {
         System.out.println("name: " + name + ",age: " + age);
