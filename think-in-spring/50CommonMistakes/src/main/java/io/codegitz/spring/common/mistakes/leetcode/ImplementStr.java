@@ -38,10 +38,14 @@ package io.codegitz.spring.common.mistakes.leetcode;
  **/
 public class ImplementStr {
     public static void main(String[] args) {
+        String s1 = "aaaaa";
+        String s2 = "aaa";
+        int i1 = s2.compareTo(s1);
+        System.out.println(i1);
         int i = strStr("mississippi", "issip");
         System.out.println(i);
     }
-    public static int strStr(String haystack, String needle) {
+    public static int strStr1(String haystack, String needle) {
         if ("".equals(needle)){
             return 0;
         }
@@ -70,5 +74,123 @@ public class ImplementStr {
             }
         }
         return -1;
+    }
+
+    public static int strStr(String haystack, String needle) {
+        if (needle.isEmpty()){
+            return 0;
+        }
+        int m = haystack.length();
+        int n = needle.length();
+        if (m < n){
+            return -1;
+        }
+        for (int i = 0 ; i <= m -n ;++i){
+            int j;
+            for (j = 0 ; j < n ; ++j){
+                if (haystack.charAt(i + j) != needle.charAt(j)){
+                    break;
+                }
+            }
+            if (j == n){
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public int strStr2(String haystack, String needle) {
+        int check = needle.length();
+
+        if(check == 0) {
+            return 0;
+        }
+
+        if(haystack.equals(needle)) {
+            return 0;
+        }
+
+        for(int i = 0; i < haystack.length() - check + 1; i++) {
+            if(haystack.substring(i, i + check).equals(needle)) {
+                return i;
+            }
+        }
+
+        return - 1;
+    }
+    public int strStr3(String haystack, String needle) {
+
+        if(needle.length() == 0) return 0;
+
+        String s = needle+'|'+haystack;
+
+        int lps[] = new int[s.length()];
+        lps[0] = 0;
+        int j = 0;
+
+        for(int i=1; i<s.length(); i++){
+            j=lps[i-1];
+
+            while(j>0 && s.charAt(i)!=s.charAt(j))
+                j = lps[j-1];
+
+            if(s.charAt(i)==s.charAt(j))
+                j++;
+
+            lps[i] = j;
+
+            if( lps[i]== needle.length()) //needle found
+                return i-(2*needle.length());
+
+        }
+
+        return -1; //if needle not found
+
+    }
+
+    public int strStr5(String haystack, String needle) {
+        char[] s = haystack.toCharArray();
+        char[] p = needle.toCharArray();
+
+        int n = s.length;
+        int m = p.length;
+
+        if(m==0) return 0;
+        if(n==0) return -1;
+
+        int[] suffix = preprocess(p);
+
+        int[] dp = new int[n];
+        if(s[0] == p[0]) dp[0] = 1;
+        else dp[0] = 0;
+        if(m==1 && dp[0] == 1) return 0;
+
+        for(int i=1; i<n; i++){
+            int j = dp[i-1];
+            while( j>=1 && p[j] != s[i]){
+                j = suffix[j-1];
+            }
+            if(p[j] == s[i]) dp[i] = j+1;
+            else dp[i] = j;
+
+            if(dp[i] == m) return i-m+1;
+        }
+
+        return -1;
+    }
+
+    int[] preprocess(char[] s){
+        int n = s.length;
+        int[] dp = new int[n];
+
+        for(int i=1; i<n; i++){
+            int j = dp[i-1];
+            while(j >=1 && s[j]!=s[i]){
+                j = dp[j-1];
+            }
+            if(s[j] == s[i]) dp[i] = j+1;
+            else dp[i] = j;
+        }
+        return dp;
     }
 }
