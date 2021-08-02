@@ -3,6 +3,7 @@
   <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="FrameworkDetectionExcludesConfiguration">
     <file type="web" url="file://$PROJECT_DIR$/think-in-spring/bean-scope" />
+    <file type="web" url="file://$PROJECT_DIR$/think-in-spring/rmi" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
