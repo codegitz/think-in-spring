@@ -34,6 +34,7 @@
         <module>aop</module>
         <module>50CommonMistakes</module>
         <module>mybatis</module>
+        <module>template</module>
     </modules>
     <groupId>io.codegitz</groupId>
     <version>1.0-SNAPSHOT</version>
