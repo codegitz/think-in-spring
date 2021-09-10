@@ -57,7 +57,27 @@ public class PermutationSequence {
         String permutation = getPermutation(3, 3);
         System.out.println(permutation);
     }
+
     public static String getPermutation(int n, int k) {
+        List<Integer> nums = new ArrayList<>();
+        for(int i = 1 ; i <= n;i++){
+            nums.add(i);
+        }
+        int[] fact = new int[n];
+        fact[0] = 1;
+        for(int i = 1; i < n; i++){
+            fact[i] = fact[i - 1] * i;
+        }
+        k = k - 1;
+        StringBuilder sb = new StringBuilder();
+        for(int i = n - 1; i >= 0; i--){
+            int num = nums.remove(k / fact[i]);
+            sb.append(num);
+            k %= fact[i];
+        }
+        return sb.toString();
+    }
+    public static String getPermutation2(int n, int k) {
         List<String> nums = new ArrayList<>();
         for (int i = 1; i <= n; i++) {
             nums.add(String.valueOf(i));
