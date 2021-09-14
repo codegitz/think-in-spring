@@ -56,7 +56,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  **/
 public class UniquePaths {
     public static void main(String[] args) {
-        int paths = uniquePaths(23, 12);
+        int paths = uniquePaths2(3, 3);
         System.out.println(paths);
     }
     public static int uniquePaths(int m, int n) {
@@ -79,4 +79,28 @@ public class UniquePaths {
             getPath(board,row,clo + 1,m,n,sum);
         }
     }
+
+    public static int uniquePaths2(int m, int n) {
+        table = new int[m][n];
+        table[m-1][n-1] = 1;
+        return count(m, n, 0, 0);
+    }
+
+    public static int count(int m, int n, int cm, int cn){
+        if(0 != table[cm][cn]){
+            return table[cm][cn];
+        }
+        int rCount = 0;
+        int dCount = 0;
+        if(cm < m-1){
+            dCount = count(m, n, cm+1, cn);
+        }
+        if(cn < n-1){
+            rCount = count(m, n, cm, cn+1);
+        }
+        table[cm][cn] = dCount + rCount;
+        return dCount + rCount;
+    }
+
+    static int [][] table;
 }
