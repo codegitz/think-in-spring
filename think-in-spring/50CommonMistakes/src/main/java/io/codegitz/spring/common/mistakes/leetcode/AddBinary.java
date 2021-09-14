@@ -36,4 +36,56 @@ package io.codegitz.spring.common.mistakes.leetcode;
  *
  **/
 public class AddBinary {
+    public static void main(String[] args) {
+        String s = addBinary("0", "1011");
+        System.out.println(s);
+    }
+    public static String addBinary(String a, String b) {
+        if (a == null || b == null){
+            return "";
+        }
+        if (a.length() < b.length()){
+            String tmp = a;
+            a = b;
+            b = tmp;
+        }
+        char[] ac = a.toCharArray();
+        char[] bc = b.toCharArray();
+        int m = a.length() - 1;
+        int n = b.length() - 1;
+        int carry = 0;
+        StringBuilder sb = new StringBuilder();
+        while (n >= 0 && m >= 0){
+            int add = ac[m] - '0' + bc[n] - '0' + carry;
+            carry = add / 2;
+            sb.append(add % 2);
+            m--;
+            n--;
+        }
+        if (carry > 0){
+            while (carry > 0 && m >= 0){
+                int add = ac[m] - '0' + carry;
+                carry = add / 2;
+                sb.append(add % 2);
+                m--;
+            }
+        }
+        if (carry == 0 && m >= 0){
+            while (m >= 0){
+                sb.append(ac[m] - '0');
+                m--;
+            }
+        }
+        if (carry > 0 && m < 0){
+            sb.append(carry);
+        }
+
+        String s = sb.toString();
+        char[] chars = s.toCharArray();
+        StringBuilder re = new StringBuilder();
+        for (int i = chars.length - 1; i >= 0; i--) {
+            re.append(chars[i]);
+        }
+        return re.toString();
+    }
 }
