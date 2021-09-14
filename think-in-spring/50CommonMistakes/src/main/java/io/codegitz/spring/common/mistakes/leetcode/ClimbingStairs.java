@@ -58,4 +58,29 @@ public class ClimbingStairs {
         }
         return result[0];
     }
+
+    /**
+     * less space usage
+     * @param n
+     * @return
+     */
+    public static int climbStairs2(int n) {
+        if (n == 1){
+            return 1;
+        }
+        if (n == 2){
+            return 2;
+        }
+        int sum = 0;
+        int k1 = 2;
+        int k2 = 1;
+        int tmp = 0;
+        for (int i = n - 3; i >= 0; i--) {
+            sum = k1 + k2;
+            tmp = k1;
+            k1 = sum;
+            k2 = tmp;
+        }
+        return sum;
+    }
 }
