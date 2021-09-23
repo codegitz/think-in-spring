@@ -1,6 +1,8 @@
 package io.codegitz.spring.common.mistakes.leetcode;
 
+import java.util.ArrayDeque;
 import java.util.Comparator;
+import java.util.Deque;
 
 /**
  * @author 张观权
@@ -49,20 +51,28 @@ public class LargestRectangleInHistogram implements Comparator<LargestRectangleI
         System.out.println(i);
     }
     public static int largestRectangleArea(int[] heights) {
-        if (heights == null || heights.length == 0 ){
-            return -1;
+        if (heights == null || heights.length == 0){
+            return 0;
         }
         if (heights.length == 1){
             return heights[0];
         }
+        int[] newHeights = new int[heights.length + 2];
+        for (int i = 0; i < heights.length; i++) {
+            newHeights[i + 1] = heights[i];
+        }
+        heights = newHeights;
+
         int max = 0;
-        int n = heights.length;
-        for (int i = 0; i < n; i++) {
-            int minimumHeight = heights[i];
-            for (int j = i; j < n; j++) {
-                minimumHeight = Math.min(minimumHeight,heights[j]);
-                max = Math.max(max,minimumHeight * (j - i + 1));
+        Deque<Integer> stack = new ArrayDeque<>();
+        stack.addLast(0);
+        for (int i = 1; i < newHeights.length; i++) {
+            while (heights[stack.peekLast()] > heights[i]){
+                int height = heights[stack.removeLast()];
+                int mid = i - stack.peekLast() - 1;
+                max = Math.max(max,height * mid);
             }
+            stack.addLast(i);
         }
         return max;
     }
