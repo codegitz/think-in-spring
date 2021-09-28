@@ -56,9 +56,10 @@ import java.util.List;
  **/
 public class GrayCode {
     public static void main(String[] args) {
+        grayCode(2);
         System.out.println(1 << 1 ^ 1);
     }
-    public List<Integer> grayCode(int n) {
+    public static List<Integer> grayCode(int n) {
         List<Integer> curr = new ArrayList<>();
         curr.add(0);
         boolean[] used = new boolean[1 << n];
@@ -67,7 +68,7 @@ public class GrayCode {
         return curr;
     }
 
-    private boolean backtrack(int n, List<Integer> curr, boolean[] used) {
+    private static boolean backtrack(int n, List<Integer> curr, boolean[] used) {
         if (curr.size() == 1 << n) {
             return true;
         }
