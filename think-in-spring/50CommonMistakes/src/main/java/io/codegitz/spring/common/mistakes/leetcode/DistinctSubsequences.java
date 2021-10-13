@@ -1,6 +1,7 @@
 package io.codegitz.spring.common.mistakes.leetcode;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * @author 张观权
@@ -75,5 +76,45 @@ public class DistinctSubsequences {
         }
         return dp[t.length()][s.length()];
 
+    }
+
+    // excellent solution
+    HashMap<Integer, Integer> map = new HashMap<>();
+    int m, n;
+    char[] sc, tc;
+    public int numDistinctEx(String s, String t) {
+        m = s.length();
+        n = t.length();
+        if(m < n) {
+            return 0;
+        }
+
+        sc = s.toCharArray();
+        tc = t.toCharArray();
+
+        return numDistinct(0, m, 0, n);
+    }
+    int numDistinct(int i, int j, int k, int l){
+        if(k == l) {
+            return 1;
+        }
+        if(k > l) {
+            return 0;
+        }
+
+        int hash = ((i*m+j)*m+k)*n+l;
+        Integer num = map.get(hash);
+        if(num != null) {
+            return num;
+        }
+
+        int result = 0;
+        for(int x=i; x<=j-l+k; x++){
+            if(sc[x] == tc[k]) {
+                result += numDistinct(x+1, j, k+1, l);
+            }
+        }
+        map.put(hash, result);
+        return result;
     }
 }
