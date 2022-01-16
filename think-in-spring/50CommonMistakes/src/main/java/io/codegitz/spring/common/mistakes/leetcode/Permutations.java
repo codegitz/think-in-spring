@@ -592,10 +592,10 @@ public class Permutations {
         }
     }
 
-    public static void main(String[] args) {
-        int canCompleteCircuit = canCompleteCircuit(new int[]{2,3,4}, new int[]{3,4,3});
-        System.out.println(canCompleteCircuit);
-    }
+//    public static void main(String[] args) {
+//        int canCompleteCircuit = canCompleteCircuit(new int[]{2,3,4}, new int[]{3,4,3});
+//        System.out.println(canCompleteCircuit);
+//    }
 
     public static int canCompleteCircuit(int[] gas, int[] cost) {
         if(gas == null || cost == null){
@@ -625,6 +625,181 @@ public class Permutations {
             }
         }
         return -1;
+    }
+
+//    public static void main(String[] args) {
+//        int ladderLength = ladderLength("a", "c", Arrays.asList("a", "b", "c"));
+//        System.out.println(ladderLength);
+//    }
+    public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
+        List<List<String>> result = new ArrayList<>();
+        Set<String> dictionary = new HashSet<>(wordList);
+        dictionary.remove(beginWord);
+        if (!dictionary.contains(endWord)){
+            return 0;
+        }
+        int step = 0;
+        for (int i = 0; i < beginWord.length(); i++) {
+            char replace = beginWord.charAt(i);
+            for (char j = 'a'; j <= 'z'; j++) {
+                if(replace != j){
+                    StringBuilder sb = new StringBuilder(beginWord);
+                    sb.replace(i,i + 1, String.valueOf(j));
+                    String newStrings = sb.toString();
+                    if (newStrings.equals(endWord)){
+                        return step + 1;
+                    }
+                    if (dictionary.contains(newStrings)){
+                        step++;
+                        beginWord = newStrings;
+                        i = -1;
+                        dictionary.remove(newStrings);
+                        break;
+                    }
+                }
+            }
+//            StringBuilder sb = new StringBuilder(beginWord);
+//            sb.replace(i,i + 1, String.valueOf(replace));
+//            beginWord = sb.toString();
+        }
+        return beginWord.equals(endWord) ? step : 0;
+    }
+
+    public int ladderLength2(String beginWord, String endWord, List<String> wordList) {
+        HashSet<String> words = new HashSet<>(wordList);
+        Queue<String> queue = new LinkedList<>();
+        queue.add(beginWord);
+
+        int endHash = endWord.hashCode(), level = 1;
+
+        while(!queue.isEmpty()){
+            int size = queue.size();
+
+            for(int itr = 0; itr < size; itr++){
+                String curr = queue.poll();
+                char[] str = curr.toCharArray();
+
+                //optimize string comparision
+                if(endHash == curr.hashCode() && curr.equals(endWord)){
+                    return level;
+                }
+
+                for(int idx = 0; idx < str.length; idx++){
+                    char c = str[idx];
+
+                    for(char letter = 'a'; letter <= 'z'; letter++){
+                        if(str[idx] != letter){
+                            str[idx] = letter;
+                            String newStr = new String(str);
+
+                            if(words.contains(newStr)){
+                                queue.add(newStr);
+                                words.remove(newStr);
+                            }
+
+                            str[idx] = c;
+                        }
+                    }
+                }
+            }
+
+            level++;
+        }
+
+        return 0;
+    }
+
+//    public static void main(String[] args) {
+//        int[][] graph = new int[4][];
+//        graph[0] = new int[]{1, 2};
+//        graph[1] = new int[]{3};
+//        graph[2] = new int[]{3};
+//        graph[3] = new int[]{};
+//        List<List<Integer>> lists = allPathsSourceTarget(graph);
+//        System.out.println(lists);
+//    }
+    public static List<List<Integer>> allPathsSourceTarget(int[][] graph) {
+        if(graph == null || graph.length == 0){
+            return new ArrayList<>();
+        }
+        int end = graph.length - 1;
+        Deque<Integer> queue = new ArrayDeque<>();
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> tmp = new ArrayList<>();
+        queue.addLast(0);
+        return result;
+    }
+
+//    public static void main(String[] args) {
+//        int i = rangeBitwiseAnd(1, 2147483647);
+//        System.out.println(i);
+//    }
+
+    public static int rangeBitwiseAnd(int left, int right) {
+
+        for(int i=right-1;i>=left;i--) {
+
+            right=right&i;
+            i=right;
+        }
+        return right;
+    }
+
+//    public static void main(String[] args) {
+//        boolean happy = isHappy(7);
+//        System.out.println(happy);
+//    }
+
+    public static boolean isHappy(int n) {
+        if(n == 1){
+            return true;
+        }
+        int fast = n;
+        int slow = n;
+        do{
+            fast = traver(n);
+            slow = traver(fast);
+            if(fast == 1){
+                return true;
+            }
+        }while(fast != slow);
+
+        return false;
+    }
+    public static int traver(int n){
+        int sum = 0;
+        while(n != 0){
+            sum += (n % 10) * (n % 10);
+            n /= 10;
+        }
+        return sum;
+    }
+
+    public static void main(String[] args) {
+        int i = countPrimes(10);
+        System.out.println(i);
+    }
+
+    public static int countPrimes(int n) {
+        if(n == 0 || n == 1){
+            return 0;
+        }
+        int result = 0;
+        for(int i = 2 ; i < n ;i++){
+            if(isPrimes(i)){
+                result++;
+            }
+        }
+        return result;
+    }
+
+    public static boolean isPrimes(int n ){
+        for(int i = 2 ; i <= n / 2; i++){
+            if(n % i == 0){
+                return false;
+            }
+        }
+        return true;
     }
 
 
