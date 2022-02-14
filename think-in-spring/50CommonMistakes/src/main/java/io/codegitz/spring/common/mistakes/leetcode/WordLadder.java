@@ -51,13 +51,13 @@ import java.util.stream.Stream;
  *
  **/
 public class WordLadder {
-    public static void main(String[] args) {
-        String beginWord = "hit";
-        String endWord = "cog";
-        List<String> wordList = Arrays.asList("hot", "dot", "dog", "lot", "log", "cog");
-        int ladderLength = ladderLength(beginWord, endWord, wordList);
-        System.out.println(ladderLength);
-    }
+//    public static void main(String[] args) {
+//        String beginWord = "hit";
+//        String endWord = "cog";
+//        List<String> wordList = Arrays.asList("hot", "dot", "dog", "lot", "log", "cog");
+//        int ladderLength = ladderLength(beginWord, endWord, wordList);
+//        System.out.println(ladderLength);
+//    }
     public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
         List<List<String>> result = new ArrayList<>();
         Set<String> dictionary = new HashSet<>(wordList);
@@ -87,5 +87,36 @@ public class WordLadder {
 //            beginWord = sb.toString();
         }
         return beginWord.equals(endWord) ? step : 0;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {10, 23, -41, 0, 452, 1, -44, 42, 0, 1, 2, 3, 4, 5, 6, 7};
+        reverse(nums);
+        System.out.println(nums);
+    }
+
+    public static void reverse(int[] nums){
+        if (nums == null){
+            return;
+        }
+        int left = 0;
+        int right = nums.length - 1;
+        while (left < right){
+            if (nums[left] > 0 && nums[right] <= 0){
+                left++;
+                right--;
+            }else if (nums[left] > 0){
+                left++;
+            }else if (nums[right] <= 0){
+                right--;
+            }else {
+                int tmp = nums[left];
+                nums[left] = nums[right];
+                nums[right] = tmp;
+                left++;
+                right--;
+            }
+
+        }
     }
 }
