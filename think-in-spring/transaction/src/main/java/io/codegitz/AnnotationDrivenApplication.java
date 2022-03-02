@@ -3,19 +3,18 @@ package io.codegitz;
 import io.codegitz.entity.User;
 import io.codegitz.service.UserService;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * @author Codegitz
- * @date 2022/2/18 11:02
+ * @date 2022/2/28 15:23
  **/
-public class Application {
+public class AnnotationDrivenApplication {
     public static void main(String[] args) throws Exception {
-        System.getProperties().put("sun.misc.ProxyGenerator.saveGeneratedFiles","true");
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext("io.codegitz");
         UserService userService = (UserService) applicationContext.getBean("userService");
         User user = new User();
-        user.setName("codegitz");
+        user.setName("codegitzByAnnotation");
         user.setAge(25);
         user.setSex("man");
         // insert a record
