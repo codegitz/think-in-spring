@@ -48,9 +48,41 @@ public class RotateList {
         node3.next = node4;
         ListNode node5 = new ListNode(5);
         node4.next = node5;
-        ListNode listNode = rotateRight(node1, 5);
+        ListNode listNode = rotateRight2(node1, 2);
         System.out.println(listNode);
     }
+
+    public static ListNode rotateRight2(ListNode head, int k) {
+        if(head == null || k == 0){
+            return head;
+        }
+        int length = 0;
+        ListNode tmp = head;
+        ListNode end = null;
+        while(tmp != null){
+            length++;
+            if(tmp.next == null){
+                end = tmp;
+            }
+            tmp = tmp.next;
+        }
+        k = k % length;
+        if (k == 0){
+            return head;
+        }
+        int step = length - k - 1;
+        tmp = head;
+        while(step != 0){
+            tmp = tmp.next;
+            step--;
+        }
+        ListNode point = tmp.next;
+        tmp.next = null;
+        end.next = head;
+        return point;
+    }
+
+
     public static ListNode rotateRight(ListNode head, int k) {
         if (head == null || k == 0){
             return head;
