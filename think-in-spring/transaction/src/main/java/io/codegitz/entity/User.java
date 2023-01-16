@@ -2,19 +2,34 @@ package io.codegitz.entity;
 
 /**
  * @author Codegitz
+<<<<<<< Updated upstream
  * @date 2022/2/18 10:29
  **/
 public class User {
     private String id;
+=======
+ * @date 2022/1/28 15:57
+ **/
+public class User {
+    private int id;
+>>>>>>> Stashed changes
     private String name;
     private int age;
     private String sex;
 
+<<<<<<< Updated upstream
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
+=======
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+>>>>>>> Stashed changes
         this.id = id;
     }
 
