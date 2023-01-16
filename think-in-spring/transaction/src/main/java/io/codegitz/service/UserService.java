@@ -16,11 +16,4 @@ public interface UserService {
      * @param user 用户信息
      */
     void save(User user) throws Exception;
-=======
- * @date 2022/1/28 17:40
- **/
-@Transactional(propagation = Propagation.REQUIRED)
-public interface UserService {
-    public void save(User user) throws Exception;
->>>>>>> Stashed changes
 }
