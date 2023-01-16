@@ -7,37 +7,43 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="template" />
-        <module name="data-binding" />
-        <module name="argument" />
-        <module name="dependency-injection" />
+        <module name="transaction" />
         <module name="aop" />
-        <module name="mybatis" />
-        <module name="questions" />
-        <module name="decode" />
-        <module name="mockito" />
-        <module name="rmi" />
-        <module name="dmz" />
+        <module name="validation (1)" />
         <module name="configuration-metadata" />
-        <module name="dependency-source" />
-        <module name="event" />
+        <module name="application-context-lifecycle" />
+        <module name="rmi" />
+        <module name="50CommonMistakes" />
         <module name="bean-lifecycle" />
+        <module name="environment" />
+        <module name="dmz" />
+        <module name="resource" />
+        <module name="dependency-injection" />
+        <module name="dependency-circular" />
+        <module name="mockito" />
         <module name="ioc-container-overview" />
-        <module name="validation" />
+        <module name="dependency-lookup" />
+        <module name="generic" />
+        <module name="mock" />
+        <module name="annotation" />
+        <module name="spring-mvc" />
+        <module name="dependency-source" />
+        <module name="data-binding" />
+        <module name="event" />
+        <module name="mybatis" />
+        <module name="decode" />
         <module name="bean-scope" />
         <module name="conversion" />
-        <module name="annotation" />
-        <module name="resource" />
-        <module name="dependency-lookup" />
-        <module name="application-context-lifecycle" />
-        <module name="dependency-circular" />
-        <module name="generic" />
-        <module name="i18n" />
-        <module name="environment" />
-        <module name="50CommonMistakes" />
-        <module name="mock" />
         <module name="spring-bean" />
+        <module name="validation" />
+        <module name="questions" />
+        <module name="i18n" />
+        <module name="argument" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="8" />
+    <bytecodeTargetLevel target="8">
+      <module name="think-in-spring" target="1.5" />
+      <module name="untitled" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

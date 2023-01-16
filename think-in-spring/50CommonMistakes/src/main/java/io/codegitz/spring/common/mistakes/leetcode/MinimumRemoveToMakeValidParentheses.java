@@ -51,7 +51,7 @@ import java.util.Stack;
  **/
 public class MinimumRemoveToMakeValidParentheses {
     public static void main(String[] args) {
-        String s = minRemoveToMakeValid("lee(t(c)o)de)");
+        String s = minRemoveToMakeValid("(((()))");
         System.out.println(s);
     }
     public static String minRemoveToMakeValid(String s) {

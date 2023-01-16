@@ -27,6 +27,6 @@ public class UserServiceImpl implements UserService {
                 ,new Object[]{user.getName(),user.getAge(),user.getSex()}
                 ,new int[]{Types.VARCHAR,Types.INTEGER,Types.VARCHAR});
         // 事务测试，如果抛出异常则数据实际上不会被保存到数据库中
-//        throw new RuntimeException("Throwing exceptions manually...");
+        throw new RuntimeException("Throwing exceptions manually...");
     }
 }
